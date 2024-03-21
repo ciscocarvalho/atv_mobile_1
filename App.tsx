@@ -23,15 +23,19 @@ export default function App() {
     <SafeAreaView style={styles.bgContainer}>
       <View style={styles.column}>
         <View style={styles.column}>
-          <center>
-            <Image style={styles.icon} source={icon} />
-          </center>
-          <View style={styles.column}>
-            <Text style={styles.text}>Cadastre seu mob:</Text>
-            <View style={styles.row}>
-              <Text style={styles.text}>Nome:</Text>
-              <TextInput style={styles.textInput} onChangeText={(name) => setMobName(name)} value={mobName} />
+          <View style={styles.row}>
+            <center>
+              <Image style={styles.icon} source={icon} />
+            </center>
+
+            <View style={styles.bgContainer}>
+              <Text style={styles.text}>Cadastre seu mob:</Text>
             </View>
+          </View>
+
+          <View style={styles.column}>
+            <Text style={{ ...styles.text, alignSelf: 'flex-start' }}>Nome:</Text>
+            <TextInput style={styles.textInput} onChangeText={(name) => setMobName(name)} value={mobName} />
             <View style={styles.rowBetween}>
               <Button title='Limpar' onPress={clearMobName} />
               <Button title='Adicionar' onPress={addMobName} />
@@ -44,10 +48,12 @@ export default function App() {
             nameList.map((name, index) => {
               return <>
                 <View style={styles.mobNameContainer}>
-                  <Text style={styles.text}>
-                    {name}
-                  </Text>
-                  <Button title='Apagar' onPress={() => removeMobNameByIndex(index)}></Button>
+                  <View style={styles.row}>
+                    <Text style={styles.text}>
+                      {name}
+                    </Text>
+                    <Button title='Apagar' onPress={() => removeMobNameByIndex(index)}></Button>
+                  </View>
                 </View>
               </>
             })
@@ -76,13 +82,17 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     flexDirection: 'row',
   },
   textInput: {
     borderColor: 'black',
     borderWidth: 2,
     height: 30,
+  },
+  columnBetween: {
+    flexDirection: 'column',
+    justifyContent: 'space-between',
   },
   rowBetween: {
     flexDirection: 'row',
